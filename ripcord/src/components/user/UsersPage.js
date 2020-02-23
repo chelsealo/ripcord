@@ -10,21 +10,32 @@ class UsersPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      checkedItems: new Map(),
-      // checkboxes: [
-      //   {id: 1, isChecked: false},
-      //   {id: 2, isChecked: false},
-      //   {id: 3, isChecked: false}
-      // ]
+      //checkedItems: new Map(),
+      checkboxes: [
+        {id: 'cory-house', isChecked: false},
+        {id: 'scott-allen', isChecked: false},
+        {id: 'dan-wahlin', isChecked: false}
+      ]
     }
   }
 
   handleChange = (event) => {
-    const item = event.target.id;
-    const isChecked = event.target.checked;
-    this.setState(prevState => ({ 
-      checkedItems: prevState.checkedItems.set(item, !isChecked) 
-    }));
+    // const item = event.target.id;
+    // const isChecked = event.target.checked;
+    // this.setState(prevState => ({ 
+    //   checkedItems: prevState.checkedItems.set(item, !isChecked) 
+    // }));
+
+
+    // this.setState(initialState => ({
+    //   isChecked: !initialState.isChecked,
+    // }));
+    let checkboxes = this.state.checkboxes
+    checkboxes.forEach(box => {
+       if (box.value === event.target.value)
+          box.isChecked =  event.target.checked
+    })
+    this.setState({checkboxes: checkboxes})
   }
 
   redirectToAddUserPage = () => {
@@ -41,10 +52,13 @@ class UsersPage extends Component {
 
   deleteAll = (event, id) => {
     event.preventDefault();
-    this.props.actions
-      .deleteUser(id)
-      .then(() => toastr.success('Users deleted!'))
-      .catch(error => toastr.error(error));
+    let checkboxes = this.state.checkboxes
+    checkboxes.forEach(box => {
+       if (box.isChecked === true)
+        this.props.actions.deleteUser(id)
+    })
+      // .then(() => toastr.success('Users deleted!'))
+      // .catch(error => toastr.error(error));
   };
 
   render() {
@@ -61,7 +75,7 @@ class UsersPage extends Component {
         <input
           className="btn btn-primary"
           type="delete"
-          value="Delete All"
+          value="Delete Selected"
           onClick={this.deleteAll}
         />
         <UserList users={users} deleteUser={this.deleteUser} handleChange={this.handleChange} />

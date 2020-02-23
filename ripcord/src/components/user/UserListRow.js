@@ -7,7 +7,7 @@ import Checkbox from './Checkbox';
 const UserListRow = ({ user, deleteUser, handleChange }) => {
   return (
     <tr>
-    <Checkbox type={'checkbox'} id={user.id} checked={false} onChange={event => handleChange(event)}/>
+    <input type={'checkbox'} id={user.id} isChecked={user.id.isChecked} onChange={event => handleChange(event)}/>
       <td>
 	      <a href="#" onClick={event => deleteUser(event, user.id)}>Delete</a>
       </td>
