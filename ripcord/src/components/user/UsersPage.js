@@ -19,24 +19,46 @@ class UsersPage extends Component {
     }
   }
 
-  handleChange = (event) => {
-    // const item = event.target.id;
-    // const isChecked = event.target.checked;
-    // this.setState(prevState => ({ 
-    //   checkedItems: prevState.checkedItems.set(item, !isChecked) 
-    // }));
+  handleChange = (event, id) => {
+    // const val = event.target.checked;
+    // console.log(val)
+    // console.log(id)
+    // this.setState({
+    //   checkboxes.forEach(box => {
+    //     if (id === box.id)
+    //     box.isChecked = event.target.checked
+    //     console.log(box.isChecked)
+    //   })
+      //checkboxes: this.state.checkboxes.map(el => (el.id === id ? {...el, val} : el)) 
+      //checkboxes: prevState.checkboxes.set(checkboxes[id], event.target.checked) 
+    // });
+  
 
-
-    // this.setState(initialState => ({
-    //   isChecked: !initialState.isChecked,
-    // }));
+    // 
+    // 
+    //   console.log(id)
+    //   console.log(box.id)
+    // 
+    // this.setState({checkboxes: checkboxes})
+    
     let checkboxes = this.state.checkboxes
     checkboxes.forEach(box => {
-       if (box.value === event.target.value)
-          box.isChecked =  event.target.checked
+      if (id === box.id) {
+        box.isChecked =  event.target.checked
+      }
+      console.log(box.isChecked)
     })
     this.setState({checkboxes: checkboxes})
-  }
+  };
+
+    //  updated all of them
+    // let checkboxes = this.state.checkboxes
+    // checkboxes.forEach(box => {
+    //   box.isChecked =  event.target.checked
+    //   console.log(box.isChecked)
+    // })
+    // this.setState({checkboxes: checkboxes})
+  
 
   redirectToAddUserPage = () => {
     this.props.history.push('/user');
@@ -50,15 +72,16 @@ class UsersPage extends Component {
       .catch(error => toastr.error(error));
   };
 
-  deleteAll = (event, id) => {
-    event.preventDefault();
+  deleteAll = event => {
     let checkboxes = this.state.checkboxes
     checkboxes.forEach(box => {
-       if (box.isChecked === true)
-        this.props.actions.deleteUser(id)
+       if (box.isChecked == true)
+        this.props.actions
+          .deleteUser(box.id)
+          .then(() => toastr.success('User deleted!'))
+          .catch(error => toastr.error(error));
     })
-      // .then(() => toastr.success('Users deleted!'))
-      // .catch(error => toastr.error(error));
+
   };
 
   render() {
@@ -67,7 +90,7 @@ class UsersPage extends Component {
       <div>
         <h2>Users</h2>
         <input
-          className="btn btn-primary"
+          className="btn btn-primary"t
           type="submit"
           value="Add User"
           onClick={this.redirectToAddUserPage}

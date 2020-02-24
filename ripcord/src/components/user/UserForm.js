@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import toastr from 'toastr';
+import { withRouter } from "react-router";
 
 class UserForm extends Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class UserForm extends Component {
     this.setState({ isFormDirty: false });
     this.props.onSave(event);
   };
+  //task 2
+  redirectToUsers = () => {
+    this.props.history.push('/users');
+  };
+  
   render() {
     const { user, saving, errors } = this.props;
     return (
@@ -66,4 +72,4 @@ UserForm.propTypes = {
   errors: PropTypes.object,
 };
 
-export default UserForm;
+export default withRouter(UserForm);

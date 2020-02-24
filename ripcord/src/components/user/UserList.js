@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserListRow from './UserListRow';
-import Checkbox from './Checkbox';
 
 const UserList = ({ users, deleteUser, handleChange }) => {
   return (

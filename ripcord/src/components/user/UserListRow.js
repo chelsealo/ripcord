@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Checkbox from './Checkbox';
+//import Checkbox from './Checkbox';
 
 
 const UserListRow = ({ user, deleteUser, handleChange }) => {
   return (
     <tr>
-    <input type={'checkbox'} id={user.id} isChecked={user.id.isChecked} onChange={event => handleChange(event)}/>
+    <input type={'checkbox'} id={user.id} onChange={event => handleChange(event, user.id)}/>
       <td>
 	      <a href="#" onClick={event => deleteUser(event, user.id)}>Delete</a>
       </td>
