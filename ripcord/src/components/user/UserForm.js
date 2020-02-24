@@ -25,7 +25,7 @@ class UserForm extends Component {
   redirectToUsers = () => {
     this.props.history.push('/users');
   };
-  
+
   render() {
     const { user, saving, errors } = this.props;
     return (
@@ -58,6 +58,12 @@ class UserForm extends Component {
           value={saving ? 'Saving...' : 'Save'}
           className="btn btn-primary"
           onClick={this.onHandleSave}
+        />
+        <input
+          type="cancel"
+          value={'Cancel'}
+          className="btn btn-primary"
+          onClick={this.redirectToUsers}
         />
       </form>
     );

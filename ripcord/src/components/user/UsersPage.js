@@ -9,56 +9,27 @@ import toastr from 'toastr';
 class UsersPage extends Component {
   constructor(props, context) {
     super(props, context);
+    //task 1
     this.state = {
-      //checkedItems: new Map(),
       checkboxes: [
         {id: 'cory-house', isChecked: false},
         {id: 'scott-allen', isChecked: false},
         {id: 'dan-wahlin', isChecked: false}
-      ]
+      ],
+      users: this.props.users 
     }
   }
 
+  //task 1
   handleChange = (event, id) => {
-    // const val = event.target.checked;
-    // console.log(val)
-    // console.log(id)
-    // this.setState({
-    //   checkboxes.forEach(box => {
-    //     if (id === box.id)
-    //     box.isChecked = event.target.checked
-    //     console.log(box.isChecked)
-    //   })
-      //checkboxes: this.state.checkboxes.map(el => (el.id === id ? {...el, val} : el)) 
-      //checkboxes: prevState.checkboxes.set(checkboxes[id], event.target.checked) 
-    // });
-  
-
-    // 
-    // 
-    //   console.log(id)
-    //   console.log(box.id)
-    // 
-    // this.setState({checkboxes: checkboxes})
-    
     let checkboxes = this.state.checkboxes
     checkboxes.forEach(box => {
       if (id === box.id) {
         box.isChecked =  event.target.checked
       }
-      console.log(box.isChecked)
     })
     this.setState({checkboxes: checkboxes})
   };
-
-    //  updated all of them
-    // let checkboxes = this.state.checkboxes
-    // checkboxes.forEach(box => {
-    //   box.isChecked =  event.target.checked
-    //   console.log(box.isChecked)
-    // })
-    // this.setState({checkboxes: checkboxes})
-  
 
   redirectToAddUserPage = () => {
     this.props.history.push('/user');
@@ -72,6 +43,7 @@ class UsersPage extends Component {
       .catch(error => toastr.error(error));
   };
 
+  //task 1
   deleteAll = event => {
     let checkboxes = this.state.checkboxes
     checkboxes.forEach(box => {
@@ -81,7 +53,12 @@ class UsersPage extends Component {
           .then(() => toastr.success('User deleted!'))
           .catch(error => toastr.error(error));
     })
+  };
 
+  sortUsers = event => {
+      let users = this.state.users
+      users = this.props.users.sort((a, b) => a.lastName > b.lastName ? 1 : -1)
+      this.setState({users: users})
   };
 
   render() {
@@ -100,6 +77,12 @@ class UsersPage extends Component {
           type="delete"
           value="Delete Selected"
           onClick={this.deleteAll}
+        />
+        <input
+          className="btn btn-primary"
+          type="sort"
+          value="Sort"
+          onClick={this.sortUsers}
         />
         <UserList users={users} deleteUser={this.deleteUser} handleChange={this.handleChange} />
       </div>

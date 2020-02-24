@@ -19,7 +19,6 @@ const UserList = ({ users, deleteUser, handleChange }) => {
             user={user}
             deleteUser={deleteUser}
             handleChange={handleChange}
-            
           />
         ))}
       </tbody>
