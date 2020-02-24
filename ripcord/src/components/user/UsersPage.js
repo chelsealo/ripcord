@@ -16,7 +16,7 @@ class UsersPage extends Component {
         {id: 'scott-allen', isChecked: false},
         {id: 'dan-wahlin', isChecked: false}
       ],
-      users: this.props.users 
+      users: this.props.users
     }
   }
 
