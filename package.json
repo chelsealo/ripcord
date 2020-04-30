@@ -17,7 +17,7 @@
     "redux-form-material-ui": "^4.0.1",
     "redux-saga": "^0.11.0",
     "prop-types": "15.5.10",
-    "jquery": "2.2.3",
+    "jquery": "3.5.0",
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^3.0.0-alpha.10",
